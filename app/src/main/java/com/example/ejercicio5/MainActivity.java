@@ -1,9 +1,11 @@
 package com.example.ejercicio5;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
 
    private Switch sRecordar;
 
+   private TextView tvMensaje;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,14 +40,21 @@ public class MainActivity extends AppCompatActivity {
         tContraseña = findViewById(R.id.etContraseña);
         bContinuar = findViewById(R.id.bContinuar);
         sRecordar = findViewById(R.id.sRecordar);
+        tvMensaje = findViewById(R.id.tvMensaje);
 
         bContinuar.setOnClickListener(v -> {
-
             String correo = tCorreo.getText().toString();
             String contraseña = tContraseña.getText().toString();
 
-            if (correo == "correo@correo.com" && contraseña == "123") {
+            Boolean recordar = sRecordar.isChecked();
 
+            if (correo.equals("correo@correo.com") && contraseña.equals("123") && recordar) {
+                tvMensaje.setText("Usuario y contraseña correctos\nAlmacenados para la siguiente sesión");
+                tvMensaje.setTextColor(Color.GREEN);
+            }
+            else {
+                tvMensaje.setText("Usuario y/o contraseña incorrectos");
+                tvMensaje.setTextColor(Color.RED);
             }
         });
     }
